@@ -1,5 +1,9 @@
 package org.example.world;
 
+import org.example.objets.Armes;
+import org.example.objets.Boucliers;
+import org.example.objets.Sacoche;
+
 import java.text.DecimalFormat;
 
 public abstract class Combattant implements ICombattants {
@@ -7,14 +11,26 @@ public abstract class Combattant implements ICombattants {
     private String nom;
     private Integer pointDeVie;
     private double endurance;
+    private Sacoche sacoche;
+    private int armeEquipee;
+    private int bouclierEquipe;
 
     public Combattant(String nom, Integer pointDeVie, double endurance){
         this.nom = nom;
         this.pointDeVie = pointDeVie;
         this.endurance = endurance;
     }
-    public String toString(){
-        return "nom: "+this.nom+", point de vie: "+this.pointDeVie;
+
+    @Override
+    public String toString() {
+        return "Combattant{" +
+                "nom='" + nom + '\'' +
+                ", pointDeVie=" + pointDeVie +
+                ", endurance=" + endurance +
+                ", sacoche=" + sacoche +
+                ", armeEquipee=" + armeEquipee +
+                ", bouclierEquipe=" + bouclierEquipe +
+                '}';
     }
 
     public String getNom() {
@@ -40,6 +56,33 @@ public abstract class Combattant implements ICombattants {
     public void setEndurance(double endurance) {
         this.endurance = endurance;
     }
+    @Override
+    public void setSacoche(Sacoche sacoche) {
+        this.sacoche = sacoche;
+    }
+
+    @Override
+    public Sacoche getSacoche() {
+        return sacoche;
+    }
+
+    @Override
+    public Armes getArmeEquipee() {
+        return sacoche.armeEquipee(armeEquipee);
+    }
+    // equipe une arme choisi dans la sacoche
+    @Override
+    public void setArmeEquipee(int armeEquipee) {
+        this.armeEquipee = armeEquipee;
+    }
+    public Boucliers getBouclierEquipe() {
+        return sacoche.bouclierEquipe((bouclierEquipe));
+    }
+    // equipe un bouclier choisi dans la sacoche
+    // mettre 0 si pas de bouclier => bouclier aux stats 0
+    public void setBouclierEquipe(int bouclierEquipe) {
+        this.bouclierEquipe = bouclierEquipe;
+    }
 
     /**
      * Permet de recuperer les degats de l'attaque de l'arme
@@ -47,6 +90,12 @@ public abstract class Combattant implements ICombattants {
      */
     @Override
     public void attaquer(ICombattants adversaire) {
+        // utilisation du bouclier => moins de degats + perte endurance
+        // points d'attaque subis
+
+        // if(adversaire.getBouclierEquipe() >=0){
+
+        //}
         adversaire.setPointDeVie(this.getPointDeVie() - (this.getArmeEquipee().getDegat()));
 
     }
@@ -59,14 +108,13 @@ public abstract class Combattant implements ICombattants {
         Par exemple, un héros qui a 70pt d’endurance et qui est équipé d’une épée de 50cm pesant 900gr,
         quand il attaque perdra (50*900)/10000 = 4.5pt d’endurance.
          */
-        // utilise pour le formatage de l'endurance
-        DecimalFormat df = new DecimalFormat("0.00");
+
         // permet de forcer le format double
         double multi = 10000;
-        double resultat = (Math.round((this.getArmeEquipee().getLongueur() * this.getArmeEquipee().getPoids() / multi)*100.0)/100.0);
-        double envoi = this.getEndurance() - resultat;
+        double calculPerte = (Math.round((this.getArmeEquipee().getLongueur() * this.getArmeEquipee().getPoids() / multi)*100.0)/100.0);
+        double envoi = Math.round((this.getEndurance() - calculPerte)*100.0)/100.0;
         this.setEndurance(envoi);
-        return resultat;
+        return calculPerte;
 
     }
 

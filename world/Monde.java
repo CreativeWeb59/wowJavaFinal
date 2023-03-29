@@ -44,6 +44,7 @@ public class Monde {
         monstres.equipeBouclier();
 
         System.out.println(heros);
+        System.out.println(monstres);
     }
 
     /**

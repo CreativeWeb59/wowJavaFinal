@@ -25,6 +25,7 @@ public interface ICombattants {
     public Boucliers getBouclierEquipe();
     public void setBouclierEquipe(int bouclierEquipe);
     public double perteEndurance();
+    public String toString();
 
     // n'est plus utilise
     // choix de l'arme int alea de l'arme dans la sacoche

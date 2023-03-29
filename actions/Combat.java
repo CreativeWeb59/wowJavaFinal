@@ -51,8 +51,7 @@ public class Combat {
     /**
      * Methode qui permet au heros d'attaquer 
      * Mets a jour l'endurance perdue chez les 2 équipe
-     * @param hero
-     * @param monster
+     *
      */
     private static void attaque(ICombattants combattants1, ICombattants combattants2){
         combattants1.attaquer(combattants2);
