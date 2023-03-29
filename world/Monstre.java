@@ -13,9 +13,10 @@ public class Monstre extends Combattant {
     private int armeEquipee;
     private int bouclierEquipe;
 
-    public Monstre(String nom, Integer pointDeVie) {
-        super(nom,pointDeVie);
+    public Monstre(String nom, Integer pointDeVie, double endurance) {
+        super(nom, pointDeVie, endurance);
     }
+
     public Sacoche getSacoche() {
         return sacoche;
     }

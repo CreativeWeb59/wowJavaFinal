@@ -15,9 +15,10 @@ public class MonstreFactory {
     public static Monstre build(){
         String nom = monstrePrenom[new Random().nextInt(monstrePrenom.length)]
                 +monstreNom[new Random().nextInt(monstreNom.length)];
-        Integer pdv = new Random().nextInt(50,101);
+        Integer pdv = new Random().nextInt(40,101);
+        Integer endurance = new Random().nextInt(50,101);
 
-        return new Monstre(nom,pdv);
+        return new Monstre(nom,pdv, endurance);
 
     }
 

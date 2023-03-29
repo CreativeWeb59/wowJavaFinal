@@ -12,13 +12,11 @@ import org.example.objets.Sacoche;
 public class Hero extends Combattant {
 
     private Sacoche sacoche;
-    // private Armes armes;
     private int armeEquipee;
     private int bouclierEquipe;
-    private int endurance;
 
-    public Hero(String nom, Integer pointDeVie){
-        super(nom, pointDeVie);
+    public Hero(String nom, Integer pointDeVie, double endurance) {
+        super(nom, pointDeVie, endurance);
     }
 
     @Override

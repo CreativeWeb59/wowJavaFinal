@@ -14,9 +14,10 @@ public class HerosFactory {
      **/
     public static Hero build(){
         String nom = heroNom[new Random().nextInt(heroNom.length)];
-        Integer pdv = new Random().nextInt(50,101);
+        Integer pdv = new Random().nextInt(40,101);
+        double endurance = new Random().nextInt(50,101);
 
-        return new Hero(nom,pdv);
+        return new Hero(nom,pdv, endurance);
 
     }
 
