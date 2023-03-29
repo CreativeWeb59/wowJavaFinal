@@ -77,4 +77,8 @@ public class Sacoche implements Iterable<Armes> {
         }
         return bestArme;
     }
+    // retourne le detail de l'arme equipee dans la sacoche
+    public Armes armeEquipee(int index){
+        return tabArmes.get(index);
+    }
 }

@@ -11,7 +11,7 @@ import org.example.objets.Sacoche;
 public class Hero extends Combattant {
 
     private Sacoche sacoche;
-    private Armes armes;
+    // private Armes armes;
     private int armeEquipee;
     private int bouclierEquipe;
 
@@ -22,35 +22,47 @@ public class Hero extends Combattant {
     @Override
     public String toString() {
         return "Hero{" +
-                "armes=" + armes +
+                "Arme équipée =" + getArmeEquipee() +
                 ", armeEquipee=" + armeEquipee +
                 ", bouclierEquipe=" + bouclierEquipe +
-                ", sacoche=" + sacoche +
+                ", Contenu " + sacoche +
                 '}';
     }
 
-    public Armes getArmes() {
-        return armes;
+    /*
+        public Armes getArmes() {
+            return armes;
+        }
+        public void setArmes(Armes armes) {
+            this.armes = armes;
+        }
+
+        public Sacoche getSacoche() {
+            return sacoche;
+        }
+        */
+    @Override
+    public void setSacoche(Sacoche sacoche) {
+        this.sacoche = sacoche;
     }
 
-    public void setArmes(Armes armes) {
-        this.armes = armes;
-    }
-
+    @Override
     public Sacoche getSacoche() {
         return sacoche;
     }
 
-    public void setSacoche(Sacoche sacoche) {
-        this.sacoche = sacoche;
-    }
-    // equipe une arme choisi dans la sacoche
-    public void equipeArme(int armeEquipee){
-        this.armeEquipee = armeEquipee;
-    }
+    @Override
     // equipe un bouclier choisi dans la sacoche
     public void equipeBouclier(int bouclierEquipe){
         this.bouclierEquipe = bouclierEquipe;
     }
-
+    @Override
+    public Armes getArmeEquipee() {
+        return sacoche.armeEquipee(armeEquipee);
+    }
+    // equipe une arme choisi dans la sacoche
+    @Override
+    public void setArmeEquipee(int armeEquipee) {
+        this.armeEquipee = armeEquipee;
+    }
 }

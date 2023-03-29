@@ -43,6 +43,16 @@ public class Monstre extends Combattant {
         this.bouclierEquipe = bouclierEquipe;
     }
 
+
+    public Armes getArmeEquipee() {
+        return sacoche.armeEquipee(armeEquipee);
+    }
+
+    public void setArmeEquipee(int armeEquipee) {
+        this.armeEquipee = armeEquipee;
+    }
+
+
     @Override
     public String toString() {
         return "Monstre{" +

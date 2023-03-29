@@ -17,13 +17,14 @@ public class SacocheFactory {
         List<Boucliers> listBoucliers = new ArrayList<>(buildBouclier());
         List<Nourritures> listNourritures = new ArrayList<>(buildNourriture());
         sacoche = new Sacoche(listArmes, listBoucliers, listNourritures);
-        System.out.println(sacoche);
+        // System.out.println(sacoche);
 
         // Ajoute la meilleur arme au combattant
-        Armes armes;
+        // n'est plus utilisé
+        // Armes armes;
         // combattantsS.setArmes(sacoche.bestArmes(listArmes));
         // attribue une arme aleatoire parmi celles crées
-        combattantsS.setArmes(listArmes.get(new Random().nextInt(0,listArmes.size())));
+        // combattantsS.setArmes(listArmes.get(new Random().nextInt(0,listArmes.size())));
         return sacoche;
     }
 

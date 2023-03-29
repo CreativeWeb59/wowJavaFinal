@@ -1,10 +1,6 @@
 package org.example.world;
 
-
-
-import org.example.factory.ArmeFactory;
 import org.example.factory.SacocheFactory;
-import org.example.objets.Sacoche;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,6 +32,7 @@ public class Equipe implements Iterable<ICombattants> {
         }
     }
     // Permet d’ajouter une arme à un combattant en parcourant l’équipe
+    // methode Pierre de la version 1
     /*
     public void addArmes(){
         for (ICombattants e: tab) {
@@ -43,6 +40,13 @@ public class Equipe implements Iterable<ICombattants> {
         }
     }
     */
+    // Permet d’equiper une arme à un combattant en parcourant l’équipe
+    // recupere une arme aleatoire dans le slot Armes de la sacoche
+    public void equipeArme(){
+        for (ICombattants e: tab) {
+            e.setArmeEquipee(new Random().nextInt(0,e.getSacoche().getTabArmes().size()));
+        }
+    }
 
 
     // Permet de recuperate le 1er combatant de l'équipe , celui a l'index 0

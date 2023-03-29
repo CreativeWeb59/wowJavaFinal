@@ -57,7 +57,7 @@ public class Combat {
         combattants1.attaquer(combattants2);
 
         // A modifer
-        System.out.println(combattants1.getNom() + " inflige " + combattants1.getArmes().getDegat() + " points à " + combattants2.getNom() + " avec son " + combattants1.getArmes().getNom());
+        System.out.println(combattants1.getNom() + " inflige " + combattants1.getArmeEquipee().getDegat() + " points à " + combattants2.getNom() + " avec " + combattants1.getArmeEquipee().getNom());
         System.out.println("Il reste " + combattants2.getPointDeVie() + " points de vie a "+ combattants2.getNom());
         System.out.println("Il reste " + combattants1.getPointDeVie() + " points de vie a "+ combattants1.getNom());
     }

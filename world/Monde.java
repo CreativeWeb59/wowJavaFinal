@@ -29,16 +29,18 @@ public class Monde {
         monstres.addFighter(MonstreFactory.build());
         monstres.addFighter(MonstreFactory.build());
 
-        // Ajout des armes aux Héros & Monstres -> appelé dans addSacoche()
-        // heros.addArmes();
-        // monstres.addArmes();
-
         // Ajout de la sacoche aux Héros et Monstres
         // attribue la meilleure arme
         heros.addSacoche();
         monstres.addSacoche();
 
+        // Ajout des armes aux Héros & Monstres -> appelé dans addSacoche()
+        // heros.addArmes();
+        // monstres.addArmes();
+        heros.equipeArme();
+        monstres.equipeArme();
 
+        System.out.println(heros);
     }
 
     /**
