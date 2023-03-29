@@ -1,6 +1,7 @@
 package org.example.world;
 
 import org.example.objets.Armes;
+import org.example.objets.Boucliers;
 import org.example.objets.Sacoche;
 
 /**
@@ -8,8 +9,6 @@ import org.example.objets.Sacoche;
  * nécessisant Des pdv, nom, force, endurance , coordonnées
  */
 public class Monstre extends Combattant {
-
-    private Armes armes;
     private Sacoche sacoche;
     private int armeEquipee;
     private int bouclierEquipe;
@@ -17,16 +16,6 @@ public class Monstre extends Combattant {
     public Monstre(String nom, Integer pointDeVie) {
         super(nom,pointDeVie);
     }
-
-
-    public Armes getArmes() {
-        return armes;
-    }
-
-    public void setArmes(Armes armes) {
-        this.armes = armes;
-    }
-
     public Sacoche getSacoche() {
         return sacoche;
     }
@@ -56,10 +45,19 @@ public class Monstre extends Combattant {
     @Override
     public String toString() {
         return "Monstre{" +
-                "armes=" + armes +
+                "Arme équipée =" + getArmeEquipee() +
                 ", armeEquipee=" + armeEquipee +
                 ", bouclierEquipe=" + bouclierEquipe +
-                ", sacoche=" + sacoche +
+                ", Contenu " + sacoche +
                 '}';
+    }
+
+    public Boucliers getBouclierEquipe() {
+        return sacoche.bouclierEquipe((bouclierEquipe));
+    }
+    // equipe un bouclier choisi dans la sacoche
+    // mettre 0 si pas de bouclier => bouclier aux stats 0
+    public void setBouclierEquipe(int bouclierEquipe) {
+        this.bouclierEquipe = bouclierEquipe;
     }
 }

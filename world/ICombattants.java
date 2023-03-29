@@ -2,6 +2,7 @@ package org.example.world;
 
 
 import org.example.objets.Armes;
+import org.example.objets.Boucliers;
 import org.example.objets.Sacoche;
 
 /**
@@ -19,7 +20,8 @@ public interface ICombattants {
     public void attaquer(ICombattants adversaire);
     public Armes getArmeEquipee();
     public void setArmeEquipee(int armeEquipee);
-    public void equipeBouclier(int bouclierEquipe);
+    public Boucliers getBouclierEquipe();
+    public void setBouclierEquipe(int bouclierEquipe);
 
     // n'est plus utilise
     // choix de l'arme int alea de l'arme dans la sacoche

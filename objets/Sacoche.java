@@ -81,4 +81,9 @@ public class Sacoche implements Iterable<Armes> {
     public Armes armeEquipee(int index){
         return tabArmes.get(index);
     }
+
+    // retourne le detail du bouclier equipe dans la sacoche
+    public Boucliers bouclierEquipe(int index){
+        return tabBoucliers.get(index);
+    }
 }

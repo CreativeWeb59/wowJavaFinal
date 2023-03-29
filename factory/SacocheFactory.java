@@ -41,6 +41,11 @@ public class SacocheFactory {
         Integer nbBoucliers = new Random().nextInt(1,5);
         List<Boucliers> listBoucliers = new ArrayList<>();
         Boucliers boucliers;
+        // creation d'un bouclier à valeur des stats 0
+        // pour signifier le pas de bouclier
+        boucliers = new Boucliers("aucun", 0, 0);
+        listBoucliers.add(boucliers);
+
         for (int i = 0; i <= nbBoucliers ; i++) {
             String nom = bouclierNom[new Random().nextInt(bouclierNom.length)];
             Integer defense = new Random().nextInt(5,21);

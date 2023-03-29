@@ -54,6 +54,8 @@ public class Combat {
      * @param monster
      */
     private static void attaque(ICombattants combattants1, ICombattants combattants2){
+
+
         combattants1.attaquer(combattants2);
 
         // A modifer

@@ -40,6 +40,9 @@ public class Monde {
         heros.equipeArme();
         monstres.equipeArme();
 
+        heros.equipeBouclier();
+        monstres.equipeBouclier();
+
         System.out.println(heros);
     }
 

@@ -33,6 +33,7 @@ public class Equipe implements Iterable<ICombattants> {
     }
     // Permet d’ajouter une arme à un combattant en parcourant l’équipe
     // methode Pierre de la version 1
+    // n'est plus utilisée
     /*
     public void addArmes(){
         for (ICombattants e: tab) {
@@ -40,6 +41,7 @@ public class Equipe implements Iterable<ICombattants> {
         }
     }
     */
+
     // Permet d’equiper une arme à un combattant en parcourant l’équipe
     // recupere une arme aleatoire dans le slot Armes de la sacoche
     public void equipeArme(){
@@ -48,6 +50,14 @@ public class Equipe implements Iterable<ICombattants> {
         }
     }
 
+
+    // Permet d’equiper une arme à un combattant en parcourant l’équipe
+    // recupere une arme aleatoire dans le slot Armes de la sacoche
+    public void equipeBouclier(){
+        for (ICombattants e: tab) {
+            e.setBouclierEquipe(new Random().nextInt(0,e.getSacoche().getTabBoucliers().size()));
+        }
+    }
 
     // Permet de recuperate le 1er combatant de l'équipe , celui a l'index 0
     public ICombattants chooseFighter(){

@@ -1,6 +1,7 @@
 package org.example.world;
 
 import org.example.objets.Armes;
+import org.example.objets.Boucliers;
 import org.example.objets.Sacoche;
 
 
@@ -14,6 +15,7 @@ public class Hero extends Combattant {
     // private Armes armes;
     private int armeEquipee;
     private int bouclierEquipe;
+    private int endurance;
 
     public Hero(String nom, Integer pointDeVie){
         super(nom, pointDeVie);
@@ -24,23 +26,12 @@ public class Hero extends Combattant {
         return "Hero{" +
                 "Arme équipée =" + getArmeEquipee() +
                 ", armeEquipee=" + armeEquipee +
+                "Bouclier équipé =" + getBouclierEquipe() +
                 ", bouclierEquipe=" + bouclierEquipe +
                 ", Contenu " + sacoche +
                 '}';
     }
 
-    /*
-        public Armes getArmes() {
-            return armes;
-        }
-        public void setArmes(Armes armes) {
-            this.armes = armes;
-        }
-
-        public Sacoche getSacoche() {
-            return sacoche;
-        }
-        */
     @Override
     public void setSacoche(Sacoche sacoche) {
         this.sacoche = sacoche;
@@ -52,11 +43,6 @@ public class Hero extends Combattant {
     }
 
     @Override
-    // equipe un bouclier choisi dans la sacoche
-    public void equipeBouclier(int bouclierEquipe){
-        this.bouclierEquipe = bouclierEquipe;
-    }
-    @Override
     public Armes getArmeEquipee() {
         return sacoche.armeEquipee(armeEquipee);
     }
@@ -64,5 +50,14 @@ public class Hero extends Combattant {
     @Override
     public void setArmeEquipee(int armeEquipee) {
         this.armeEquipee = armeEquipee;
+    }
+
+    public Boucliers getBouclierEquipe() {
+        return sacoche.bouclierEquipe((bouclierEquipe));
+    }
+    // equipe un bouclier choisi dans la sacoche
+    // mettre 0 si pas de bouclier => bouclier aux stats 0
+    public void setBouclierEquipe(int bouclierEquipe) {
+        this.bouclierEquipe = bouclierEquipe;
     }
 }
