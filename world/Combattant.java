@@ -93,10 +93,41 @@ public abstract class Combattant implements ICombattants {
         // utilisation du bouclier => moins de degats + perte endurance
         // points d'attaque subis
 
-        // if(adversaire.getBouclierEquipe() >=0){
+        /*
+        Par exemple, si un héros attaque un monstre et lui inflige 10pts de dégât, en se défendant avec un
+        bouclier qui encaisse 5, il ne perdra que 5 points de vie. Il ne pourra se défendre que si il a
+        l'endurance nécessaire. Chaque action de défense lui fera perdre des points d'endurances (même
+        principe qu'avec l'arme PE = (poidsGr/1000)
+         */
 
-        //}
-        adversaire.setPointDeVie(this.getPointDeVie() - (this.getArmeEquipee().getDegat()));
+        // rajouter test get pv jamais superieurs à set pv
+        Integer degatSubis = 0;
+        if (!adversaire.getBouclierEquipe().getNom().equals("aucun")){
+            // ajout du nombre de points d'encaissement sur l'adversaire
+            // baisse de l'endurance de l'adversaire
+            double multi = 1000;
+            degatSubis = this.getArmeEquipee().getDegat() - adversaire.getBouclierEquipe().getEncaissement();
+            if (degatSubis<0){
+                degatSubis =0;
+            }
+            degatSubis = adversaire.getPointDeVie() - degatSubis;
+            adversaire.setEndurance(adversaire.getBouclierEquipe().getPoids()/multi);
+
+            System.out.println(this.nom + "(" + this.getPointDeVie() + " pv) frappe " + this.getArmeEquipee().getDegat() + " points à " + adversaire.getNom() + " avec " + this.getArmeEquipee().getNom());
+            System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + " pv) bloque " + adversaire.getBouclierEquipe().getEncaissement() + " points de dégat");
+            System.out.println(this.nom + " inflige au total " +
+                    degatSubis
+                    + " points à " + adversaire.getNom());
+            adversaire.setPointDeVie(degatSubis);
+        } else {
+            System.out.println("Le défenseur n'a pas de bouclier");
+            System.out.println(this.nom + "(" + this.getPointDeVie() + ") inflige " + this.getArmeEquipee().getDegat() + " points à " + adversaire.getNom() + " avec " + this.getArmeEquipee().getNom());
+            System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + ") reçoit " + this.getArmeEquipee().getDegat() + " dégats");
+            adversaire.setPointDeVie(adversaire.getPointDeVie() - (this.getArmeEquipee().getDegat()));
+        }
+
+
+
 
     }
 
