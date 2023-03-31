@@ -49,7 +49,7 @@ public class SacocheFactory {
         for (int i = 0; i <= nbBoucliers ; i++) {
             String nom = bouclierNom[new Random().nextInt(bouclierNom.length)];
             Integer defense = new Random().nextInt(5,21);
-            Integer poids = new Random().nextInt(500,1001);
+            Integer poids = new Random().nextInt(5000,10001);
             boucliers = new Boucliers(nom, defense, poids);
             listBoucliers.add(boucliers);
         }
@@ -62,7 +62,7 @@ public class SacocheFactory {
         Nourritures nourritures;
         for (int i = 0; i <= nbNourriture ; i++) {
             String nom = nourritureNom[new Random().nextInt(nourritureNom.length)];
-            Integer valeur = new Random().nextInt(10,41);
+            Integer valeur = new Random().nextInt(1,11);
             Integer poids = new Random().nextInt(50,201);
             nourritures = new Nourritures(nom, valeur, poids);
             listNourritures.add(nourritures);

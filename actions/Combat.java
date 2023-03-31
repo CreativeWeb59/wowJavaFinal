@@ -61,8 +61,8 @@ public class Combat {
         // System.out.println(combattants1.getNom() + " inflige " + combattants1.getArmeEquipee().getDegat() + " points à " + combattants2.getNom() + " avec " + combattants1.getArmeEquipee().getNom());
         System.out.println(combattants1.getNom() + " ("+ combattants1.getEndurance() +") perd " + combattants1.perteEndurance() + " points d'endurance, il lui reste " + combattants1.getEndurance() + " points d'endurance");
 
-        System.out.println("Il reste " + combattants1.getPointDeVie() + " points de vie a "+ combattants1.getNom());
-        System.out.println("Il reste " + combattants2.getPointDeVie() + " points de vie a "+ combattants2.getNom());
+        System.out.println("Il reste " + combattants1.getPointDeVie() + " points de vie a "+ combattants1.getNom() + " et " + combattants1.getEndurance() + " d'endurance");
+        System.out.println("Il reste " + combattants2.getPointDeVie() + " points de vie a "+ combattants2.getNom() + " et " + combattants2.getEndurance() + " d'endurance");
     }
 
 }
