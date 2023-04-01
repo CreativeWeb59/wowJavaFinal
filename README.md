@@ -76,3 +76,12 @@ la nourriture)
  Quand un joueur n’a plus de points de vie il rejoint le cimetière (ne fait plus partie de
 l'équipe).
 L’équipe qui perd est la première qui n’a plus de personnage.
+
+***************************************************************************
+
+Changement :
+
+    - les points d'endurances passent en type Integer permet de simplifier la lecture des combats
+    - modification du calcul de la perte d'endurance de l'attaquant pour plus de réalisme
+        : longueur de l'arme * poids / 1500
+    - de meme pour le defenseur

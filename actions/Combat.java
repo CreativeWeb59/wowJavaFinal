@@ -2,6 +2,7 @@ package org.example.actions;
 
 
 
+import org.example.world.Combattant;
 import org.example.world.ICombattants;
 
 import java.text.DecimalFormat;
@@ -54,13 +55,38 @@ public class Combat {
      *
      */
     private static void attaque(ICombattants combattants1, ICombattants combattants2){
+
+        // choix entre attaquer ou manger
+
+        // creation d'un rand true = attaquer, false = manqger
+        int action;
+        int nbRandAction = new Random().nextInt(1, 6);
+
+        // endurance > 30 => 1 chance sur 5 de manger
+        // endurance < 30 => 1 chance sur 3 de manger
+
+        // uniquement si endurance < 30
+
+        if((combattants1.getEndurance() > 30) && (nbRandAction == 1)){
+                System.out.println("manger");
+        } else if((combattants1.getEndurance() > 30) && (nbRandAction > 1)){
+                System.out.println("attaquer");
+        } else if((combattants1.getEndurance() <= 30) && (new Random().nextInt(1, 4)==1)){
+            System.out.println("manger");
+        } else {
+            System.out.println("attaquer");
+        }
+
+
+
         combattants1.attaquer(combattants2);
 
-        // deplacement des messages dans le combat en lui memem
+        // deplacement des messages dans le combat en lui meme
         // pour mieux les detailler
-        // System.out.println(combattants1.getNom() + " inflige " + combattants1.getArmeEquipee().getDegat() + " points à " + combattants2.getNom() + " avec " + combattants1.getArmeEquipee().getNom());
-        System.out.println(combattants1.getNom() + " ("+ combattants1.getEndurance() +") perd " + combattants1.perteEndurance() + " points d'endurance, il lui reste " + combattants1.getEndurance() + " points d'endurance");
 
+
+        // affichage resultat du combat
+        combattants1.perteEndurance();
         System.out.println("Il reste " + combattants1.getPointDeVie() + " points de vie a "+ combattants1.getNom() + " et " + combattants1.getEndurance() + " d'endurance");
         System.out.println("Il reste " + combattants2.getPointDeVie() + " points de vie a "+ combattants2.getNom() + " et " + combattants2.getEndurance() + " d'endurance");
     }

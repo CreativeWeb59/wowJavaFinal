@@ -10,7 +10,7 @@ import org.example.objets.Sacoche;
  */
 public class Monstre extends Combattant {
 
-    public Monstre(String nom, Integer pointDeVie, double endurance) {
+    public Monstre(String nom, Integer pointDeVie, Integer endurance) {
         super(nom, pointDeVie, endurance);
     }
 

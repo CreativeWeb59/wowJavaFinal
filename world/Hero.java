@@ -10,7 +10,7 @@ import org.example.objets.Sacoche;
  * nécessitant Des pdv, nom, force, endurance , coordonnées
  */
 public class Hero extends Combattant {
-        public Hero(String nom, Integer pointDeVie, double endurance) {
+        public Hero(String nom, Integer pointDeVie, Integer endurance) {
         super(nom, pointDeVie, endurance);
     }
 

@@ -35,7 +35,7 @@ public class ArmeFactory {
                 break;
             case 4:
                 degat = new Random().nextInt(20,41);
-                longueur = new Random().nextInt(10,31);
+                longueur = new Random().nextInt(20,36);
                 poids = new Random().nextInt(25,101);
                 armes = new Armes("Dague", degat, longueur, poids);
                 break;
