@@ -98,7 +98,7 @@ Changements par rapport à l'exercice :
     Nourriture :
 
     - ajout d'une variable : nbPointdevie qui permet de redonner des points de vie au combattant
-    - modification de la variable valeur en nbEndurance qui redonne toujours des points d'enddurance
+    - modification de la variable valeur en nbEndurance qui redonne toujours des points d'endurance
 
     - Deroullement du combat :
 
@@ -112,4 +112,4 @@ Changements par rapport à l'exercice :
 
     - si endurance < points d'endurance necessaire au combat => manger obligatoire
 
-    - si manger impossible => pas d'action
+    - si pas de nourriture et pas assez d'endurance => pas d'action
