@@ -101,33 +101,26 @@ public abstract class Combattant implements ICombattants {
         principe qu'avec l'arme PE = (poidsGr/1000)
          */
 
-        // calcul de l'endurance necessaire pour que l'adversaire puisse utiliser son bouclier
-        Integer enduNecessaire = Math.toIntExact(Math.round(adversaire.getBouclierEquipe().getPoids() / 1000));
-
         Integer degatSubis = 0;
-        if ((!adversaire.getBouclierEquipe().getNom().equals("aucun")) && (adversaire.getEndurance() >= enduNecessaire)){
-
+        if ((!adversaire.getBouclierEquipe().getNom().equals("aucun")) && (adversaire.getEndurance() >= perteEnduranceDefenseur(adversaire))){
             // ajout du nombre de points d'encaissement sur l'adversaire
-            // baisse de l'endurance de l'adversaire
+            // ne peut pas être supérieur aux dégats subis
             degatSubis = this.getArmeEquipee().getDegat() - adversaire.getBouclierEquipe().getEncaissement();
             if (degatSubis<0){
                 degatSubis =0;
             }
-            degatSubis = adversaire.getPointDeVie() - degatSubis;
 
-            if((adversaire.getEndurance() - enduNecessaire) <0){
-                adversaire.setEndurance(0);
-            } else {
-                adversaire.setEndurance(adversaire.getEndurance() - enduNecessaire);
-            }
-
-            System.out.println(this.nom + " (" + this.getPointDeVie() + " pv) frappe " + this.getArmeEquipee().getDegat() + " points à " + adversaire.getNom() + " avec " + this.getArmeEquipee().getNom());
-            System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + " pv) bloque " + adversaire.getBouclierEquipe().getEncaissement() + " points de dégat " +
-                    "et perds " + enduNecessaire + " d'endurance");
+            System.out.println(this.nom + " (" + this.getPointDeVie() + "pv et " + this.getEndurance() + " endu) frappe " + this.getArmeEquipee().getDegat() + " points à " + adversaire.getNom() + " avec " + this.getArmeEquipee().getNom());
+            System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + "pv et "+ adversaire.getEndurance() + " endu) bloque " + adversaire.getBouclierEquipe().getEncaissement() + " points de dégat " +
+                    "et perds " + perteEnduranceDefenseur(adversaire) + " d'endurance");
             System.out.println(this.nom + " inflige au total " +
                     degatSubis
                     + " points à " + adversaire.getNom());
+
+            // Adversaire : maj endu et degats subis
+            degatSubis = adversaire.getPointDeVie() - degatSubis;
             adversaire.setPointDeVie(degatSubis);
+            adversaire.setEndurance(adversaire.getEndurance() - perteEnduranceDefenseur(adversaire));
         } else {
             if (adversaire.getBouclierEquipe().getNom().equals("aucun")) {
                 System.out.println("Le défenseur n'a pas de bouclier");
@@ -139,7 +132,8 @@ public abstract class Combattant implements ICombattants {
             System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + ") reçoit " + this.getArmeEquipee().getDegat() + " dégats");
             adversaire.setPointDeVie(adversaire.getPointDeVie() - (this.getArmeEquipee().getDegat()));
         }
-
+        // Perte d'endurance de l'attaquant
+        this.setEndurance(this.getEndurance() - perteEnduranceAttaquant());
     }
 
     /**
@@ -152,16 +146,43 @@ public abstract class Combattant implements ICombattants {
      * setEndurance passe à zéro si négative
      * @return
      */
-    public void perteEndurance(){
+
+    /**
+     * Teste deux valeurs : renvoie la premiere valeur ou la soustraction des deux<br/>
+     * la première est une valeur de base qu'on ne veut pas passer en dessous de 0<br/>
+     * la deuxième est la valeur qui se soustrait à la première<br/>
+     * utile pour le calcul de la perte d'endurance afin d'éviter des valeurs négatives<br/>
+     * @param valeurBase
+     * @param valeurMoins
+     * @return
+     */
+    public Integer valeurPositive(Integer valeurBase, Integer valeurMoins){
+        if((valeurBase - valeurMoins) < 0){
+            return valeurBase;
+        } else {
+            return (valeurMoins);
+        }
+    }
+
+    /**
+     * calcule l'endurance à perdre lorsque le combattant attaque<br/>
+     * on prends en compte la longueur de son arme et son poids<br/>
+     * @return
+     */
+    public Integer perteEnduranceAttaquant(){
         Integer multi = 1500;
         Integer calculPerte = Math.toIntExact(this.getArmeEquipee().getLongueur() * this.getArmeEquipee().getPoids() / multi);
-        System.out.println(this.getNom() + " perd " + calculPerte + " points d'endurance");
-        if((this.getEndurance() - calculPerte) < 0){
-            this.setEndurance(0);
-        } else {
-            this.setEndurance(this.getEndurance() - calculPerte);
-        }
+        return valeurPositive(this.getEndurance(), calculPerte);
+    }
 
+    /**
+     * calcule l'endurance à perdre par l'adversaire lorsqu'il possede un bouclier (ou peut l'utiliser) et bloque l'attaque<br/>
+     * @return
+     */
+    public Integer perteEnduranceDefenseur(ICombattants adversaire){
+        Integer multi = 1000;
+        Integer calculPerte = Math.toIntExact(Math.round(adversaire.getBouclierEquipe().getPoids() / multi));
+        return valeurPositive(adversaire.getEndurance(), calculPerte);
     }
 
 }

@@ -78,7 +78,6 @@ public class Combat {
         }
 
 
-
         combattants1.attaquer(combattants2);
 
         // deplacement des messages dans le combat en lui meme
@@ -86,7 +85,7 @@ public class Combat {
 
 
         // affichage resultat du combat
-        combattants1.perteEndurance();
+
         System.out.println("Il reste " + combattants1.getPointDeVie() + " points de vie a "+ combattants1.getNom() + " et " + combattants1.getEndurance() + " d'endurance");
         System.out.println("Il reste " + combattants2.getPointDeVie() + " points de vie a "+ combattants2.getNom() + " et " + combattants2.getEndurance() + " d'endurance");
     }

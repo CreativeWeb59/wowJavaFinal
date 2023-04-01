@@ -24,7 +24,8 @@ public interface ICombattants {
     public void setArmeEquipee(int armeEquipee);
     public Boucliers getBouclierEquipe();
     public void setBouclierEquipe(int bouclierEquipe);
-    public void perteEndurance();
+    public Integer perteEnduranceAttaquant();
+    public Integer perteEnduranceDefenseur(ICombattants adversaire);
     public String toString();
 
     // n'est plus utilise
