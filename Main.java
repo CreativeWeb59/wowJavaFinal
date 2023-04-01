@@ -2,7 +2,11 @@ package org.example;
 
 import org.example.world.Monde;
 
-
+/**
+ * Lancement du jeu
+ * type tour par tour
+ * avec equipe de héros et équipe de monstres
+ */
 public class Main {
     public static void main(String[] args) {
 

@@ -18,8 +18,10 @@ public class Equipe implements Iterable<ICombattants> {
         tab.add(pCombattants);
     }
 
-    // Permet d’ajouter une sacoche à un combattant en parcourant l’équipe
-    // elle est rempli d'armes, boucliers et nourriture par la SacocheFactory
+    /**
+     * Permet d’ajouter une sacoche à un combattant en parcourant l’équipe
+     * elle est rempli d'armes, boucliers et nourriture par la SacocheFactory
+     */
     public void addSacoche(){
         for (ICombattants e: tab) {
             e.setSacoche(SacocheFactory.build(e));
@@ -31,35 +33,31 @@ public class Equipe implements Iterable<ICombattants> {
             System.out.println(e.getSacoche());
         }
     }
-    // Permet d’ajouter une arme à un combattant en parcourant l’équipe
-    // methode Pierre de la version 1
-    // n'est plus utilisée
-    /*
-    public void addArmes(){
-        for (ICombattants e: tab) {
-            e.setArmes(ArmeFactory.build());
-        }
-    }
-    */
 
-    // Permet d’equiper une arme à un combattant en parcourant l’équipe
-    // recupere une arme aleatoire dans le slot Armes de la sacoche
+    /**
+     * Permet d’equiper une arme à un combattant en parcourant l’équipe
+     * recupere une arme aleatoire dans le slot Armes de la sacoche
+     */
     public void equipeArme(){
         for (ICombattants e: tab) {
             e.setArmeEquipee(new Random().nextInt(0,e.getSacoche().getTabArmes().size()));
         }
     }
 
-
-    // Permet d’equiper une arme à un combattant en parcourant l’équipe
-    // recupere une arme aleatoire dans le slot Armes de la sacoche
+    /**
+     * Permet d’equiper un bouclier à un combattant en parcourant l’équipe
+     * recupere un bouclier aleatoire dans le slot Bouclier de la sacoche
+     */
     public void equipeBouclier(){
         for (ICombattants e: tab) {
             e.setBouclierEquipe(new Random().nextInt(0,e.getSacoche().getTabBoucliers().size()));
         }
     }
 
-    // Permet de recuperate le 1er combatant de l'équipe , celui a l'index 0
+    /**
+     * Permet de recuperer le 1er combatant de l'équipe , celui à l'index 0
+     * @return
+     */
     public ICombattants chooseFighter(){
         if (tab.size() == 0){
             throw new RuntimeException("L'équipe est vide !");
@@ -69,13 +67,28 @@ public class Equipe implements Iterable<ICombattants> {
         }
     }
 
+    /**
+     * retourne la liste des l'équipe
+     * @param index
+     * @return
+     */
     public ICombattants get(int index){
         return tab.get(index);
     }
+
+    /**
+     * retourne la taille de l'équipe
+     * @return
+     */
     public int size(){
         return tab.size();
     }
 
+    /**
+     * retourne un tableau iterateur de l'équipe
+     * afin de pouvoir boucler dessus
+     * @return
+     */
     @Override
     public Iterator<ICombattants> iterator() {
         return tab.iterator();

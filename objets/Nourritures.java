@@ -2,12 +2,14 @@ package org.example.objets;
 
 public class Nourritures implements Items{
     private String nom;
-    private Integer valeur;
+    private Integer nbPointdevie;
+    private Integer nbEndurance;
     private Integer poids;
 
-    public Nourritures(String nom, Integer valeur, Integer poids) {
+    public Nourritures(String nom, Integer nbPointdevie, Integer nbEndurance, Integer poids) {
         this.nom = nom;
-        this.valeur = valeur;
+        this.nbPointdevie = nbPointdevie;
+        this.nbEndurance = nbEndurance;
         this.poids = poids;
     }
 
@@ -21,12 +23,20 @@ public class Nourritures implements Items{
         this.nom = nom;
     }
 
-    public Integer getValeur() {
-        return valeur;
+    public Integer getNbPointdevie() {
+        return nbPointdevie;
     }
 
-    public void setValeur(Integer valeur) {
-        this.valeur = valeur;
+    public void setNbPointdevie(Integer nbPointdevie) {
+        this.nbPointdevie = nbPointdevie;
+    }
+
+    public Integer getNbEndurance() {
+        return nbEndurance;
+    }
+
+    public void setNbEndurance(Integer nbEndurance) {
+        this.nbEndurance = nbEndurance;
     }
 
     @Override
@@ -43,7 +53,8 @@ public class Nourritures implements Items{
     public String toString() {
         return "Nourritures{" +
                 "nom='" + nom + '\'' +
-                ", valeur=" + valeur +
+                ", nbPointdevie=" + nbPointdevie +
+                ", nbEndurance=" + nbEndurance +
                 ", poids=" + poids +
                 '}';
     }

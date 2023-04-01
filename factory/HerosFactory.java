@@ -8,9 +8,8 @@ import java.util.Random;
 public class HerosFactory {
 
     /**
-     * Créer un personnage avec tous ses attributs.
-     * Demande a l'utilisateur d'entrer le nom du personnage.
-     * retour: une instance de la classe Personnage correctement instancié.
+     * Créer un personnage avec tout ses attributs.
+     * retour : une instance de la classe Personnage correctement instanciée.
      **/
     public static Hero build(){
         String nom = heroNom[new Random().nextInt(heroNom.length)];
@@ -21,6 +20,9 @@ public class HerosFactory {
 
     }
 
+    /**
+     * Tableau avec le nom des héros
+     */
     public static String[] heroNom = new String[] {
             "Aiden","Aurora","Blade","Cassius","Diana","Dante","Ember","Shaolan",
             "Gwyneth","Haruki","Isadora","Jaxon","Kaida","Lysandra","Maximus","Nadia",

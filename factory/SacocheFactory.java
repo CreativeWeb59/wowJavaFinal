@@ -11,23 +11,25 @@ import java.util.List;
 import java.util.Random;
 
 public class SacocheFactory {
+    /**
+     * Crée une sacoche avec 3 listes : armes, boucliers et nourritures
+     * @param combattantsS
+     * @return
+     */
     public static Sacoche build(ICombattants combattantsS){
         Sacoche sacoche;
         List<Armes> listArmes = new ArrayList<>(buildArmes());
         List<Boucliers> listBoucliers = new ArrayList<>(buildBouclier());
         List<Nourritures> listNourritures = new ArrayList<>(buildNourriture());
         sacoche = new Sacoche(listArmes, listBoucliers, listNourritures);
-        // System.out.println(sacoche);
-
-        // Ajoute la meilleur arme au combattant
-        // n'est plus utilisé
-        // Armes armes;
-        // combattantsS.setArmes(sacoche.bestArmes(listArmes));
-        // attribue une arme aleatoire parmi celles crées
-        // combattantsS.setArmes(listArmes.get(new Random().nextInt(0,listArmes.size())));
         return sacoche;
     }
 
+    /**
+     * Crée une liste des armes contenues dans la sacoche
+     * le nombre d'items est aléatoire
+     * @return
+     */
     public static List<Armes> buildArmes(){
         Integer nbArmes = new Random().nextInt(1,5);
         List<Armes> listArmes = new ArrayList<>();
@@ -36,7 +38,13 @@ public class SacocheFactory {
         }
         return listArmes;
     }
-
+    /**
+     * Crée une liste de boucliers contenus dans la sacoche
+     * le nombre d'items est aléatoire
+     * le bouclier équipé n'étant pas obligatoire, un bouclier "aucun" est crée automtiquement pour éviter les erreurs et simplifier les tests
+     * si "aucun" est équipé, alors => le combattant n'a pas de bouclier
+     * @return
+     */
     public static List<Boucliers> buildBouclier(){
         Integer nbBoucliers = new Random().nextInt(1,5);
         List<Boucliers> listBoucliers = new ArrayList<>();
@@ -55,29 +63,39 @@ public class SacocheFactory {
         }
         return listBoucliers;
     }
-
+    /**
+     * Crée une liste de nourritures contenues dans la sacoche
+     * le nombre d'items est aléatoire
+     * @return
+     */
     public static List<Nourritures> buildNourriture(){
-        Integer nbNourriture = new Random().nextInt(1,11);
+        Integer nbNourriture = new Random().nextInt(1,6);
         List<Nourritures> listNourritures = new ArrayList<>();
         Nourritures nourritures;
         for (int i = 0; i <= nbNourriture ; i++) {
             String nom = nourritureNom[new Random().nextInt(nourritureNom.length)];
-            Integer valeur = new Random().nextInt(1,11);
+            Integer nbPointdevie = new Random().nextInt(1,21);
+            Integer nbEndurance = new Random().nextInt(1,21);
             Integer poids = new Random().nextInt(50,201);
-            nourritures = new Nourritures(nom, valeur, poids);
+            nourritures = new Nourritures(nom, nbPointdevie, nbEndurance, poids);
             listNourritures.add(nourritures);
         }
         return listNourritures;
     }
 
+    /**
+     * Tableau des noms de bouclier
+     */
     public static String[] bouclierNom = new String[] {
             "rundskjold", "Skjaldmo", "Adarga", "Broquel", "Aspis", "Clipeus", "Pavois", "Rondache", "Targe", "Tarja", "ecu"
     };
 
+    /**
+     * Tableau des noms de nourriture
+     */
     public static String[] nourritureNom = new String[] {
-            "Gâteau", "Ragoût de lapin", "Champignons", "Saumon Cuit", "Pain", "Pommes", "Pomme de terre au four",
-            "Charlotte aux Fraises", "Artichauts", "Banane", "Tomate", "verre de lait", "pâtes au fromage"
+            "gâteau", "ragoût de lapin", "champignons", "saumon Cuit", "pain", "pommes", "pomme de terre au four",
+            "charlotte aux Fraises", "artichauts", "banane", "tomate", "verre de lait", "pâtes au fromage"
     };
-
 
 }

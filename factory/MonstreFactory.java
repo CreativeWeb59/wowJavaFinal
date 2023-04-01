@@ -1,6 +1,4 @@
 package org.example.factory;
-
-
 import org.example.world.Monstre;
 
 import java.util.Random;
@@ -8,9 +6,8 @@ import java.util.Random;
 public class MonstreFactory {
 
     /**
-     * Créer un Monstre avec tous ses attributs.
-     * Demande a l'utilisateur d'entrer le nom du personnage.
-     * retour: une instance de la classe Monstre correctement instancié.
+     * Crée un Monstre avec tout ses attributs.
+     * retour : une instance de la classe Monstre correctement instanciée.
      **/
     public static Monstre build(){
         String nom = monstrePrenom[new Random().nextInt(monstrePrenom.length)]
@@ -23,7 +20,7 @@ public class MonstreFactory {
     }
 
     /**
-     * Méthode qui contient une liste de prenom possibble pour le monstre
+     * Méthode qui contient une liste de prénoms possibbles pour le monstre
      * **/
     public static String[] monstrePrenom = new String[] {
             "Gobelin ","Orc ","Troll ","Elfe ","Dragon ","Licorne ","Gorgone ","Minotaure ",
@@ -33,7 +30,7 @@ public class MonstreFactory {
     };
 
     /**
-     * Méthode qui contient une liste de nom possibble pour le monstre
+     * Méthode qui contient une liste de noms possibbles pour le monstre
      * **/
     public static String[] monstreNom = new String[] {
             "Effrayant","Menaçant","Sinistre","Terrifiant","Mortel","Féroce","Implacable",

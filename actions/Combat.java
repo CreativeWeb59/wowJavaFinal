@@ -1,20 +1,16 @@
 package org.example.actions;
 
-
-
-import org.example.world.Combattant;
 import org.example.world.ICombattants;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Combat {
 
     /**
      * Methode pour executer un combat
-     * Prend 2 combattant en parametre
+     * Prend 2 combattants en paramètre
      * Tire au sort qui joue en 1er
-     * Tire au sort entre une attaque ou ce nourrir
+     * Tire au sort entre une attaque ou se nourrir
      */
     public static void combat(ICombattants hero, ICombattants monster) {
         while(hero.getPointDeVie() > 0 && monster.getPointDeVie() > 0) {
@@ -33,7 +29,7 @@ public class Combat {
     }
 
     /**
-     * Retourne un message pour savoir qui a gagner le combat
+     * Retourne un message pour savoir qui a gagné le combat
      * @param hero
      * @param monster
      */
@@ -50,10 +46,16 @@ public class Combat {
     }
 
     /**
-     * Methode qui permet au heros d'attaquer 
-     * Mets a jour l'endurance perdue chez les 2 équipe
-     *
+     * Methode qui permet au combattant de jouer
+     * choix entre : combattre et manger
+     * rand dependant de l'endurance et des points de vie de l'attaquant
+     * endurance > 30 => 1 chance sur 5 de manger
+     * endurance < 30 => 1 chance sur 3 de manger
+     * points de vie > 30 => 1 chance sur 5 de manger
+     * points de vie < 30 => 1 chance sur 2 de manger
+     * si 0 endurance ne peut pas attaquer => manger, si 0 nourriture => passe son tour
      */
+
     private static void attaque(ICombattants combattants1, ICombattants combattants2){
 
         // choix entre attaquer ou manger
@@ -62,26 +64,28 @@ public class Combat {
         int action;
         int nbRandAction = new Random().nextInt(1, 6);
 
-        // endurance > 30 => 1 chance sur 5 de manger
-        // endurance < 30 => 1 chance sur 3 de manger
-
-        // uniquement si endurance < 30
-
-        if((combattants1.getEndurance() > 30) && (nbRandAction == 1)){
-                System.out.println("manger");
-        } else if((combattants1.getEndurance() > 30) && (nbRandAction > 1)){
-                System.out.println("attaquer");
-        } else if((combattants1.getEndurance() <= 30) && (new Random().nextInt(1, 4)==1)){
-            System.out.println("manger");
+        if(combattants1.getSacoche().getNbNourriture() > 0){
+            if((combattants1.getEndurance() > 30) && (combattants1.getPointDeVie() > 30) && (nbRandAction == 1)){
+                Manger.manger(combattants1);
+            } else if((combattants1.getEndurance() <= 30) && (combattants1.getPointDeVie() > 30) && combattants1.getEndurance() >= combattants1.perteEnduranceAttaquant() && (new Random().nextInt(1, 4)==1)) {
+                Manger.manger(combattants1);
+            } else  if((combattants1.getEndurance() > 30) && (combattants1.getPointDeVie() <= 30) && combattants1.getEndurance() >= combattants1.perteEnduranceAttaquant() && (new Random().nextInt(1, 3)==1)) {
+                Manger.manger(combattants1);
+            } else  if((combattants1.getEndurance() <= 30) && (combattants1.getPointDeVie() <= 30) && combattants1.getEndurance() >= combattants1.perteEnduranceAttaquant() && (new Random().nextInt(1, 3)==1)){
+                Manger.manger(combattants1);
+            } else if (combattants1.getEndurance() < combattants1.perteEnduranceAttaquant()) {
+                Manger.manger(combattants1);
+            } else {
+                combattants1.attaquer(combattants2);
+            }
         } else {
-            System.out.println("attaquer");
+            System.out.println(combattants1.getNom() + " ne possède pas de nourriture");
+            if(combattants1.getEndurance()<combattants1.perteEnduranceAttaquant()){
+                System.out.println(combattants1.getNom() + " n'a pas assez d'endurance et de nourriture pour continuer le combat");
+            } else {
+                combattants1.attaquer(combattants2);
+            }
         }
-
-
-        combattants1.attaquer(combattants2);
-
-        // deplacement des messages dans le combat en lui meme
-        // pour mieux les detailler
 
 
         // affichage resultat du combat

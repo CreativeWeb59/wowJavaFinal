@@ -2,9 +2,10 @@ package org.example.world;
 
 import org.example.objets.Armes;
 import org.example.objets.Boucliers;
+import org.example.objets.Nourritures;
 import org.example.objets.Sacoche;
 
-import java.text.DecimalFormat;
+import java.util.List;
 
 public abstract class Combattant implements ICombattants {
 
@@ -78,8 +79,12 @@ public abstract class Combattant implements ICombattants {
     public Boucliers getBouclierEquipe() {
         return sacoche.bouclierEquipe((bouclierEquipe));
     }
-    // equipe un bouclier choisi dans la sacoche
-    // mettre 0 si pas de bouclier => bouclier aux stats 0
+
+    /**
+     * equipe un bouclier choisi dans la sacoche
+     * mettre 0 si pas de bouclier => bouclier aux stats 0
+     * @param bouclierEquipe
+     */
     public void setBouclierEquipe(int bouclierEquipe) {
         this.bouclierEquipe = bouclierEquipe;
     }
@@ -89,18 +94,10 @@ public abstract class Combattant implements ICombattants {
      * et d'infliger une perte de point de vie a l'adversaire
      * utilisation du bouclier => moins de degats + perte endurance
      * points d'attaque subis
-     * setEndurance passe à zéro si négative
+     * setEndurance passe à zéro si valeur négative
      */
     @Override
     public void attaquer(ICombattants adversaire) {
-
-        /*
-        Par exemple, si un héros attaque un monstre et lui inflige 10pts de dégât, en se défendant avec un
-        bouclier qui encaisse 5, il ne perdra que 5 points de vie. Il ne pourra se défendre que si il a
-        l'endurance nécessaire. Chaque action de défense lui fera perdre des points d'endurances (même
-        principe qu'avec l'arme PE = (poidsGr/1000)
-         */
-
         Integer degatSubis = 0;
         if ((!adversaire.getBouclierEquipe().getNom().equals("aucun")) && (adversaire.getEndurance() >= perteEnduranceDefenseur(adversaire))){
             // ajout du nombre de points d'encaissement sur l'adversaire
@@ -111,7 +108,7 @@ public abstract class Combattant implements ICombattants {
             }
 
             System.out.println(this.nom + " (" + this.getPointDeVie() + "pv et " + this.getEndurance() + " endu) frappe " + this.getArmeEquipee().getDegat() + " points à " + adversaire.getNom() + " avec " + this.getArmeEquipee().getNom());
-            System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + "pv et "+ adversaire.getEndurance() + " endu) bloque " + adversaire.getBouclierEquipe().getEncaissement() + " points de dégat " +
+            System.out.println(adversaire.getNom() + " (" + adversaire.getPointDeVie() + "pv et "+ adversaire.getEndurance() + " endu) bloque " + adversaire.getBouclierEquipe().getEncaissement() + " points de dégat " +
                     "et perds " + perteEnduranceDefenseur(adversaire) + " d'endurance");
             System.out.println(this.nom + " inflige au total " +
                     degatSubis
@@ -129,7 +126,7 @@ public abstract class Combattant implements ICombattants {
             }
 
             System.out.println(this.nom + " (" + this.getPointDeVie() + ") inflige " + this.getArmeEquipee().getDegat() + " points à " + adversaire.getNom() + " avec " + this.getArmeEquipee().getNom());
-            System.out.println(adversaire.getNom() + "(" + adversaire.getPointDeVie() + ") reçoit " + this.getArmeEquipee().getDegat() + " dégats");
+            System.out.println(adversaire.getNom() + " (" + adversaire.getPointDeVie() + ") reçoit " + this.getArmeEquipee().getDegat() + " dégats");
             adversaire.setPointDeVie(adversaire.getPointDeVie() - (this.getArmeEquipee().getDegat()));
         }
         // Perte d'endurance de l'attaquant
@@ -137,18 +134,7 @@ public abstract class Combattant implements ICombattants {
     }
 
     /**
-     * perte endurance due à l'attaque
-     * Quand une arme (épée ou gourdin) est utilisée, elle réduira les points d’endurances du personnage
-     *         en suivant le calcul suivant : (longueurCm*poidsGr)/10000
-     *         Par exemple, un héros qui a 70pt d’endurance et qui est équipé d’une épée de 50cm pesant 900gr,
-     *         quand il attaque perdra (50*900)/10000 = 4.5pt d’endurance.
-     * multi : permet d'ajuste les points d'endurance
-     * setEndurance passe à zéro si négative
-     * @return
-     */
-
-    /**
-     * Teste deux valeurs : renvoie la premiere valeur ou la soustraction des deux<br/>
+     * Teste deux valeurs : renvoie la premiere valeur ou la deuxième<br/>
      * la première est une valeur de base qu'on ne veut pas passer en dessous de 0<br/>
      * la deuxième est la valeur qui se soustrait à la première<br/>
      * utile pour le calcul de la perte d'endurance afin d'éviter des valeurs négatives<br/>
@@ -185,4 +171,18 @@ public abstract class Combattant implements ICombattants {
         return valeurPositive(adversaire.getEndurance(), calculPerte);
     }
 
+    /**
+     * recupere l'index de la liste des nourritures
+     * ajoute points de vie et endurance au combattant
+     * supprime l'index de la liste
+     * @param nourritures
+     * @param index
+     */
+    public void utiliserNourriture(List<Nourritures> nourritures, int index){
+        this.setPointDeVie(this.getPointDeVie() + nourritures.get(index).getNbPointdevie());
+        this.setEndurance(this.getEndurance() + nourritures.get(index).getNbEndurance());
+        System.out.println(this.nom + " mange " + nourritures.get(index).getNom() + ", il gagne " + nourritures.get(index).getNbPointdevie() +
+                " points de vie et " + nourritures.get(index).getNbEndurance() + " points d'endurance");
+        nourritures.remove(index);
+    }
 }

@@ -4,21 +4,22 @@ package org.example.world;
 import org.example.actions.Combat;
 import org.example.factory.MonstreFactory;
 import org.example.factory.HerosFactory;
-import org.example.factory.SacocheFactory;
 
 import java.util.Random;
 
 public class Monde {
 
-    //Création des équipes
+    // Création des équipes
     Equipe heros = new Equipe();
     Equipe monstres = new Equipe();
 
 
     /**
-     * Methode qui regroupe les différent objet
-     * a instancier et a regroupe dans les
-     * sac et & equipe respective
+     * Methode qui regroupe les différents objets à instancier
+     * crée les équipes de héros et monstres
+     * crée les armes, les boucliers, les nourritures
+     * crée la sacoche pour chaque combattant
+     * attribue, les armes, boucliers et nourriture
      */
     public void lancementJeu() {
 
@@ -30,31 +31,27 @@ public class Monde {
         monstres.addFighter(MonstreFactory.build());
 
         // Ajout de la sacoche aux Héros et Monstres
-        // attribue la meilleure arme
         heros.addSacoche();
         monstres.addSacoche();
 
         // Ajout des armes aux Héros & Monstres -> appelé dans addSacoche()
-        // heros.addArmes();
-        // monstres.addArmes();
         heros.equipeArme();
         monstres.equipeArme();
 
         heros.equipeBouclier();
         monstres.equipeBouclier();
 
-        System.out.println(heros);
-        System.out.println(monstres);
+        // System.out.println(heros);
+        // System.out.println(monstres);
     }
 
     /**
-     * Methode qui boucle sur l'équipe des héros et des monstres pour execute les combat ou les action
+     * Methode qui boucle sur l'équipe des héros et des monstres pour executer les combats ou les actions
      * @return un boolean pour savoir si l'équipe est en vie ou non
      */
     public boolean demarrer() {
         boolean etat;
         boolean tourJeux = new Random().nextBoolean();
-        //System.out.println(heros.size()+" "+monstres.size());
        try{
            if (tourJeux){
                Combat.combat(heros.chooseFighter(), monstres.chooseFighter());
@@ -71,7 +68,7 @@ public class Monde {
     }
 
     /**
-     * Essayer pour retourner la team qui gagne
+     * retourne l'équipe gagnante
      * @return
      */
     public void teamWinner(){
@@ -80,7 +77,7 @@ public class Monde {
        }else if (monstres.size() == 0) {
             System.out.println("Les héros ont gagné !");
         }else{
-            System.out.println("No one win.");
+            System.out.println("Pas de vainqueur !");
         }
     }
 }

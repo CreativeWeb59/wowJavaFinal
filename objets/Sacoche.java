@@ -1,8 +1,5 @@
 package org.example.objets;
 
-import org.example.world.ICombattants;
-
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,7 +52,11 @@ public class Sacoche implements Iterable<Armes> {
         return tabArmes.iterator();
     }
 
-    // recherche la meilleure arme dans la sacoche
+    /**
+     * retourne la meilleure arme de la sacoche
+     * @param armes
+     * @return
+     */
     public Armes bestArmes(List armes){
         Iterator<Armes> iter = iterator();
         // arme par defaut
@@ -77,13 +78,71 @@ public class Sacoche implements Iterable<Armes> {
         }
         return bestArme;
     }
-    // retourne le detail de l'arme equipee dans la sacoche
+
+    /**
+     * retourne le detail de l'arme equipee dans la sacoche
+     * @param index
+     * @return
+     */
     public Armes armeEquipee(int index){
         return tabArmes.get(index);
     }
 
-    // retourne le detail du bouclier equipe dans la sacoche
+    /**
+     * retourne le detail du bouclier equipe dans la sacoche
+     * @param index
+     * @return
+     */
     public Boucliers bouclierEquipe(int index){
         return tabBoucliers.get(index);
+    }
+
+    /**
+     * Retourne le nombre de nourriture de la liste nourriture
+     */
+    public Integer getNbNourriture(){
+        return this.tabNourritures.size();
+    }
+
+    /**
+     * Retourne l'id de la meilleure nourriture de la sacoche
+     * donnant le plus de points de vie
+     * @return
+     */
+    public Integer getBestPdv(){
+        Iterator<Nourritures> iterator = this.tabNourritures.listIterator();
+        Integer bestPdv = 0;
+        Integer idBestPdv = 0;
+        Integer index = 0;
+        while (iterator.hasNext()){
+            Nourritures l = iterator.next();
+            if(l.getNbPointdevie() > bestPdv){
+                bestPdv = l.getNbPointdevie();
+                idBestPdv = index;
+            }
+            index++;
+        }
+
+        return idBestPdv;
+    }
+
+    /**
+     * Retourne l'id de la meilleure nourriture de la sacoche
+     * donnant le plus d'endurance
+     */
+    public Integer getBestEndurance(){
+        Iterator<Nourritures> iterator = this.tabNourritures.listIterator();
+        Integer bestEndurance = 0;
+        Integer idBestEndurance = 0;
+        Integer index = 0;
+        while (iterator.hasNext()){
+            Nourritures l = iterator.next();
+            if(l.getNbEndurance() > bestEndurance){
+                bestEndurance = l.getNbEndurance();
+                idBestEndurance = index;
+            }
+            index++;
+        }
+        return idBestEndurance;
     }
 }

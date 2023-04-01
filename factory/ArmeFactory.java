@@ -7,6 +7,10 @@ import org.example.objets.Armes;
 import java.util.Random;
 
 public class ArmeFactory {
+    /**
+     * Cree des armes, tout aléatoire : nom, degat, longueur, poids
+     * @return une instance de Armes
+     */
     public static Armes build(){
         Integer rand = new Random().nextInt(1,6);
         Armes armes;

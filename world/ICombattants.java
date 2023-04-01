@@ -3,7 +3,10 @@ package org.example.world;
 
 import org.example.objets.Armes;
 import org.example.objets.Boucliers;
+import org.example.objets.Nourritures;
 import org.example.objets.Sacoche;
+
+import java.util.List;
 
 /**
  * Interface qui contient tous les getter et setter que les 
@@ -26,10 +29,7 @@ public interface ICombattants {
     public void setBouclierEquipe(int bouclierEquipe);
     public Integer perteEnduranceAttaquant();
     public Integer perteEnduranceDefenseur(ICombattants adversaire);
+    public void utiliserNourriture(List<Nourritures> nourritures, int index);
     public String toString();
 
-    // n'est plus utilise
-    // choix de l'arme int alea de l'arme dans la sacoche
-    // public Armes getArmes();
-    // public void setArmes(Armes armes);
 }
